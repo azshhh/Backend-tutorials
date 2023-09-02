@@ -1,0 +1,21 @@
+npm
+    npm init --yes
+
+Semantic Version - semver
+    Major.Minor.Patch
+    4.13.6
+    newFeature.Feature.bugs
+
+    newFeature -  Adding new feature with breaking existing API - 5.0.0
+    Feature - Adding new feature without breaking existing API - 4.14.0
+    Bug - Found any bug and update - 4.13.1
+    ^ - caret
+    ~ - tilde
+
+    npm init --yes
+    npm view mongoose
+    npm view mongoose dependencies
+    npm view mongoose versions
+
+    npm i jshint --save--dev
+    npm un mongoose
