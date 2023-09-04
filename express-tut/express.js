@@ -1,6 +1,4 @@
-// require fxn returns a fxn, so we call this fxn and give it a argument. this argument is arbirary namespace that we define for debugging
-const startupDebugger =  require('debug')('app:startup');
-const dbDebugger =  require('debug')('app:db');
+const debug =  require('debug')('app:startup');
 const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -22,10 +20,8 @@ app.use(helmet());
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    startupDebugger("Morgan enabled...");
+    debug("Morgan enabled...");
 }
-
-dbDebugger('Connected to DB.');
 
 courses = [
     { id: 1, name: 'course1' },
