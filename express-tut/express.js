@@ -3,17 +3,12 @@ const logger = require('./logger')
 const express = require('express');
 const app = express();
 
-// Middleware into request processing pipeline
-app.use(express.json())
+app.use(express.json());
+// This middleware fxn parses incoming req with urlencoded payloads
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(logger);
 
-// Custom logging middleware
-app.use(logger)
-
-// Custom Authenticating middleware
-app.use((req, res, next) => {
-    console.log('Authenticating...');
-    next();
-})
 
 courses = [
     { id: 1, name: 'course1' },
