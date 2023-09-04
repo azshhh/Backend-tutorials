@@ -25,3 +25,10 @@ Debugging
     set DEBUG=app:db
     set DEBUG=app:*
     DEBUG=app:db nodemon express.js
+
+Templating
+    npm i pug
+    set view engine for application
+    create views folder
+    create index.pug
+    
