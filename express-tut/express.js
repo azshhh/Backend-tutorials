@@ -1,5 +1,6 @@
-const morgan = require('morgan')
-const helmet = require('helmet')
+const config = require('config');
+const morgan = require('morgan');
+const helmet = require('helmet');
 const Joi = require('joi');
 const logger = require('./logger')
 const express = require('express');
@@ -11,7 +12,11 @@ app.use(express.static('public'));
 app.use(logger);
 app.use(helmet());
 
-console.log(`app: ${app.get('env')}`);
+// Cofiguration
+console.log('Application Name: ' + config.get('name'));
+console.log('Mail Server: ' + config.get('mail.host'));
+console.log('Mail Password: ' + config.get('mail.password'));
+
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
     console.log("Morgan enabled...");
