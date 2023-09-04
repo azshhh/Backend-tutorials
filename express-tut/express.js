@@ -5,23 +5,17 @@ const logger = require('./logger')
 const express = require('express');
 const app = express();
 
-
-// "process" is globle object in node, this gives access to the current process.
-// This object has prop called 'env', which gives us environment variables
-// We have standard env-var returns environment for this node application.
-
-console.log(`NODE_ENV: ${process.env.NODE_ENV}`); // returns undefined.
-// this method internally uses this env-var to detect current env, if NODE_ENV is not set, by default it is set to development.
-console.log(`app: ${app.get('env')}`);
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(logger);
 app.use(helmet());
-app.use(morgan('tiny'));
 
+console.log(`app: ${app.get('env')}`);
+if (app.get('env') === 'development') {
+    app.use(morgan('tiny'));
+    console.log("Morgan enabled...");
+}
 
 courses = [
     { id: 1, name: 'course1' },
