@@ -3,8 +3,10 @@ const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const Joi = require('joi');
-const logger = require('./logger');
-const courses = require('./courses');
+const logger = require('./middleware/logger');
+const courses = require('./routes/courses');
+const home = require('./routes/home');
+
 const express = require('express');
 const app = express();
 
@@ -17,15 +19,12 @@ app.use(express.static('public'));
 app.use(logger);
 app.use(helmet());
 app.use('/api/courses', courses);
+app.use('/', home);
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
     debug("Morgan enabled...");
 }
-
-app.get('/', (req, res) => {
-    res.render('index', { title: "Express App", message: 'Hello' });
-})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
