@@ -51,28 +51,29 @@ app.put('/api/courses/:id', (req, res) => {
     // If not existing, return 404
     if (!course) res.status(404).send("Course with given ID is not available");
 
-    // Validate
-    const schema = {
-        name: Joi.string().min(3).required()
-    };
-    const result = validateCourse(req.body);
+    // Validating new way 
+    // const result = validateCourse(req.body);
+    // Object destructuring 
+    const { error } = validateCourse(req.body)
     // If invalid, return 400 - bad request
-    if (result.error) {
-        res.status(400).send(result.error.details[0].message);
+    if (error) {
+        res.status(400).send(error.details[0].message);
         return;
     }
-    
+
     // Update course
     course.name = req.body.name;
     // return the updated course
     res.send(course);
-    
+
 })
 
 function validateCourse(course) {
     const schema = {
         name: Joi.string().min(3).required()
     };
+
+    //  This is an 'target object' it has to props -> error and value, with object destructuring we can access these props
     return Joi.validate(course, schema);
 }
 
