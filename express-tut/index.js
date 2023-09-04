@@ -2,6 +2,7 @@ const Joi = require('joi');
 const express = require('express');
 const app = express();
 
+// Middleware into request pipeline
 app.use(express.json())
 
 courses = [
@@ -40,34 +41,26 @@ app.post('/api/courses', (req, res) => {
 
 // HTTP PUT
 app.put('/api/courses/:id', (req, res) => {
-    // Course Existance check
+
     const course = courses.find(c => c.id === parseInt(req.params.id));
-    if (!course) res.status(404).send("Course with given ID is not available");
+    if (!course) return res.status(404).send("Course with given ID is not available");
 
-    // Course validation
     const { error } = validateCourse(req.body)
-    if (error) {
-        res.status(400).send(error.details[0].message);
-        return;
-    }
+    if (error) return res.status(400).send(error.details[0].message);
 
-    // Update course
     course.name = req.body.name;
     res.send(course);
 
 })
 
+// HTTP DELETE
 app.delete('/api/courses/:id', (req, res) => {
     const course = courses.find(c => c.id === parseInt(req.params.id));
-    if (!course) res.status(404).send("Course with given ID is not available");
+    if (!course) return res.status(404).send("Course with given ID is not available");
 
-    //  To delete a particular course in courses array, we need find index of that course.
     const index = courses.indexOf(course);
-
-    // Using splice method to delete object from courses array. Go to the index and remove one object
-    courses.splice(index, 1)
+    courses.splice(index, 1);
     
-    // Return course
     res.send(course);
 })
 
