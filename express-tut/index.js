@@ -57,6 +57,14 @@ app.put('/api/courses/:id', (req, res) => {
 
 })
 
+app.delete('/api/courses/:id', (req, res)=>{
+    // Look up course
+    // if not existing, return 404
+
+    // Delete
+    // Return course
+})
+
 // Course validation function
 function validateCourse(course) {
     const schema = {
