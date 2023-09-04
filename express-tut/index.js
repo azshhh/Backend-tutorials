@@ -32,29 +32,29 @@ app.post('/api/courses', (req, res) => {
 
     const result = Joi.validate(req.body, schema);
     if (result.error) {
-        // 400 Bad Request
         res.status(400).send(result.error.details[0].message);
         return;
     }
+
     const course = {
         id: courses.length + 1,
-        // In order to read name property from req.body object, we need enabele parsing of JSON objects in body of requests, bcoz by default this feature is not enable in express.
         name: req.body.name
     };
-    // Pushing course object into array of courses 
-    courses.push(course); 
+
+    courses.push(course);
     res.send(course);
 })
 
-app.put('/api/courses/:id', (req, res)=>{
+app.put('/api/courses/:id', (req, res) => {
     // Look up the course
     // If not existing, return 404
 
     // Validate
     // If invalid, return 400 - bad request
-
+    
     // Update course
     // return the updated course
+    
 })
 
 const port = process.env.PORT || 3000;
