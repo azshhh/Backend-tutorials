@@ -24,9 +24,17 @@ app.get('/api/courses/:id', (req, res) => {
     res.send(course);
 })
 
-app.post('/api/courses', (req, res)=>{
+app.post('/api/courses', (req, res) => {
+
+    if (!req.body.name || req.body.name.length < 3) {
+        // 400 Bad Request
+        res.status(400).send('Name is required and should be minimum 3 characters.');
+        return;
+    }
+
+
     const course = {
-        id: courses.length + 1 ,
+        id: courses.length + 1,
         // In order to read name property from req.body object, we need enabele parsing of JSON objects in body of requests, bcoz by default this feature is not enable in express.
         name: req.body.name
     };
