@@ -26,13 +26,10 @@ app.get('/api/courses/:id', (req, res) => {
 })
 
 app.post('/api/courses', (req, res) => {
-    const schema = {
-        name: Joi.string().min(3).required()
-    };
-
-    const result = Joi.validate(req.body, schema);
-    if (result.error) {
-        res.status(400).send(result.error.details[0].message);
+    const { error } = validateCourse(req.body)
+    // If invalid, return 400 - bad request
+    if (error) {
+        res.status(400).send(error.details[0].message);
         return;
     }
 
