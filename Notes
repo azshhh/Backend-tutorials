@@ -19,3 +19,9 @@ Semantic Version - semver
 
     npm i jshint --save--dev
     npm un mongoose
+
+Debugging
+    set DEBUG=app:startapp
+    set DEBUG=app:db
+    set DEBUG=app:*
+    DEBUG=app:db nodemon express.js
