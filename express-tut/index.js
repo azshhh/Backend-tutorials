@@ -57,12 +57,18 @@ app.put('/api/courses/:id', (req, res) => {
 
 })
 
-app.delete('/api/courses/:id', (req, res)=>{
-    // Look up course
-    // if not existing, return 404
+app.delete('/api/courses/:id', (req, res) => {
+    const course = courses.find(c => c.id === parseInt(req.params.id));
+    if (!course) res.status(404).send("Course with given ID is not available");
 
-    // Delete
+    //  To delete a particular course in courses array, we need find index of that course.
+    const index = courses.indexOf(course);
+
+    // Using splice method to delete object from courses array. Go to the index and remove one object
+    courses.splice(index, 1)
+    
     // Return course
+    res.send(course);
 })
 
 // Course validation function
