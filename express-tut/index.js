@@ -47,13 +47,25 @@ app.post('/api/courses', (req, res) => {
 
 app.put('/api/courses/:id', (req, res) => {
     // Look up the course
+    const course = courses.find(c => c.id === parseInt(req.params.id));
     // If not existing, return 404
+    if (!course) res.status(404).send("Course with given ID is not available");
 
     // Validate
+    const schema = {
+        name: Joi.string().min(3).required()
+    };
+    const result = Joi.validate(req.body, schema);
     // If invalid, return 400 - bad request
+    if (result.error) {
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
     
     // Update course
+    course.name = req.body.name;
     // return the updated course
+    res.send(course);
     
 })
 
