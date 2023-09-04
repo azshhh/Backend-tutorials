@@ -10,8 +10,10 @@
   "license": "ISC",
   "keywords": [],
   "dependencies": {
+    "helmet": "^7.0.0",
     "joi": "^13.1.0",
     "mongoose": "^7.5.0",
+    "morgan": "^1.10.0",
     "underscore": "^1.13.6"
   }
 }
