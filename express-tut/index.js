@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// When we call 'express.json()' this method returns middleware, and we call 'app.use()' to use middleware in req processing pipeline.
+app.use(express.json())
+
 courses = [
     { id: 1, name: 'course1' },
     { id: 2, name: 'course2' },
@@ -18,6 +21,18 @@ app.get('/api/courses', (req, res) => {
 app.get('/api/courses/:id', (req, res) => {
     const course = courses.find(c => c.id === parseInt(req.params.id));
     if (!course) res.status(404).send("Course with given ID is not available");
+    res.send(course);
+})
+
+app.post('/api/courses', (req, res)=>{
+    const course = {
+        id: courses.length + 1 ,
+        // In order to read name property from req.body object, we need enabele parsing of JSON objects in body of requests, bcoz by default this feature is not enable in express.
+        name: req.body.name
+    };
+
+    // Pushing course object into array of courses 
+    courses.push(course);
     res.send(course);
 })
 
