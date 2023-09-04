@@ -1,9 +1,19 @@
 const Joi = require('joi');
+const logger = require('./logger')
 const express = require('express');
 const app = express();
 
 // Middleware into request processing pipeline
 app.use(express.json())
+
+// Custom logging middleware
+app.use(logger)
+
+// Custom Authenticating middleware
+app.use((req, res, next) => {
+    console.log('Authenticating...');
+    next();
+})
 
 courses = [
     { id: 1, name: 'course1' },
