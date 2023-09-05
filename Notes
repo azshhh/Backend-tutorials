@@ -35,5 +35,17 @@ Templating
 Asyncchronous code
     3 patterns to deal with async code
         callback - Is a fxn, which is called when the result of async code is ready
-        promise
+        promise - Is an object that holds the eventual result of async operation
         async / await
+
+    Promise work flow -
+         A promise is an object that holds eventual result of an async operation.
+         Initially its in the pending state,
+         When we create this promise, it picks up an async operation
+         This async operation can either resolves or gets rejected
+         On being fullfilled, state of promise changes from pending - resolved
+         On being fail, state of promise changes from pending - rejected
+
+         Then this behaviour of promise object can be handled by 
+            .then on being fullfilled
+            .catch on being fail
