@@ -1,13 +1,10 @@
 console.log('Before');
 
-// getUser returns a promise resolving a user object
 getUser(1)
-    // getRepositories returns a promise resolving an array of repos for that user
     .then(user => getRepositories(user.userName))
-    // above then has a fxn that returns a value which is wrapped inside a promise
     .then(repos => getCommits(repos[0]))
     .then(commits => console.log('Commits: ', commits))
-    .catch(err => console.log('Error: ', err));
+    .catch(err => console.log('Error: ', err.message)); 
 
 console.log('After');
 
