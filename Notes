@@ -34,6 +34,6 @@ Templating
     
 Asyncchronous code
     3 patterns to deal with async code
-        callback
+        callback - Is a fxn, which is called when the result of async code is ready
         promise
         async / await
