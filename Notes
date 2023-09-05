@@ -49,3 +49,6 @@ Asyncchronous code
          Then this behaviour of promise object can be handled by 
             .then on being fullfilled
             .catch on being fail
+
+        Promise constructor function takes an argument. which is a fxn with 2 parameter resolve and reject,
+        we use these parameter to signal the result of asynchronous operation or an error.
