@@ -1,21 +1,15 @@
-const { reject } = require("underscore");
-
-// Asynchronous 
 console.log('Before');
-getUser(1, getRepositories);
+
+// getUser returns a promise resolving a user object
+getUser(1)
+    // getRepositories returns a promise resolving an array of repos for that user
+    .then(user => getRepositories(user.userName))
+    // above then has a fxn that returns a value which is wrapped inside a promise
+    .then(repos => getCommits(repos[0]))
+    .then(commits => console.log('Commits: ', commits))
+    .catch(err => console.log('Error: ', err));
+
 console.log('After');
-
-function getRepositories(user) {
-    getRepositories(user.userName, getCommits)
-}
-
-function getCommits(repos) {
-    getCommits(repo, displayCommits)
-}
-
-function displayCommits(commits) {
-    console.log(commits);
-}
 
 function getUser(id) {
     return new Promise((resolve, reject) => {
@@ -30,6 +24,7 @@ function getUser(id) {
 function getRepositories(username) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+            console.log("Calling GitHub Repos...");
             resolve(['repo1', 'repo2', 'repo3']);
         }, 2000);
     });
@@ -38,6 +33,7 @@ function getRepositories(username) {
 function getCommits(repo) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+            console.log("Calling GitHub commits...");
             resolve(['commit']);
         }, 2000);
     });
