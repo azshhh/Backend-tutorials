@@ -32,3 +32,8 @@ Templating
     create views folder
     create index.pug
     
+Asyncchronous code
+    3 patterns to deal with async code
+        callback
+        promise
+        async / await
