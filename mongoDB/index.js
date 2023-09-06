@@ -20,12 +20,13 @@ const Course = mongoose.model('Course', courseSchema);
 // CREATE operation
 async function createCourse() {
     const course = new Course({
-        name: 'Django Course',
+        name: 'Dummy Course',
         author: 'Redbull',
         tags: ['python', 'backend'],
         isPublished: true,
     });
     const result = await course.save();
+    console.log(result);
 }
 
 // READ operation
@@ -40,16 +41,6 @@ async function getCourses() {
 
 // UPDATE operation
 async function updateCourse(id) {
-
-    // Approach - Query First -> Client input based
-    // const course = await Course.findById(id);
-    // if (!course) return;
-    // course.set({
-    //     isPublished: true,
-    //     author: 'Ferrari'
-    // });
-
-    // Approach - Update First -> Just update based
     const result = await Course.update({ _id: id }, {
         $set: {
             author: 'Redbull',
@@ -59,4 +50,11 @@ async function updateCourse(id) {
     console.log(result);
 }
 
-updateCourse('64f87832bb3e7d35784ce19a');
+// DELETE operation
+async function deleteCourse(id) {
+    // const result = await Course.deleteOne({ _id: id });
+    const course = await Course.findByIdAndRemove(id);
+    console.log(course);
+}
+
+deleteCourse('64f88af648d3b911f8b66248');
