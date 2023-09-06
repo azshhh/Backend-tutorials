@@ -23,4 +23,8 @@ const course = new Course({
     author: 'Redbull',
     tags: ['node', 'backend'],
     isPublished: true,
-}); 
+});
+
+// To save an object in db, it will take time to access file system. Thats why we are dealing with asynchronous operation. Therefore save() method returns a promise. So we can await it.
+const result = await course.save();
+console.log(result);
