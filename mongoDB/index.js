@@ -40,20 +40,22 @@ async function getCourses() {
 
 // UPDATE operation
 async function updateCourse(id) {
-    
-    // find course usinf findById()
-    const course = await Course.findById(id);
 
-    // if not exist, return
-    if (!course) return;
+    // Approach - Query First -> Client input based
+    // const course = await Course.findById(id);
+    // if (!course) return;
+    // course.set({
+    //     isPublished: true,
+    //     author: 'Ferrari'
+    // });
 
-    // update keys using set()
-    course.set({
-        isPublished: true,
-        author: 'Ferrari'
+    // Approach - Update First -> Just update based
+    const result = await Course.update({ _id: id }, {
+        $set: {
+            author: 'Redbull',
+            isPublished: false
+        }
     });
-
-    const result = await course.save();
     console.log(result);
 }
 
